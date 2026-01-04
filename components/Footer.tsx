@@ -65,6 +65,11 @@ export function Footer() {
                     About
                   </a>
                 </li>
+                <li>
+                  <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Contact
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -77,10 +82,19 @@ export function Footer() {
                 onClick={() => setIsSuggestionsOpen(true)}
                 variant="outline"
                 size="sm"
-                className="w-full"
+                className="w-full mb-2"
               >
                 <MessageSquare className="h-4 w-4 mr-2" />
                 Send Suggestion
+              </Button>
+              <Button
+                onClick={() => window.location.href = '/contact'}
+                variant="default"
+                size="sm"
+                className="w-full"
+              >
+                <Mail className="h-4 w-4 mr-2" />
+                Contact Form
               </Button>
             </div>
           </div>
