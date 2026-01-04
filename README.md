@@ -72,10 +72,22 @@ npm start
 
 The easiest way to deploy VizDrop is using [Vercel](https://vercel.com):
 
-1. Push your code to GitHub
-2. Import your repository in Vercel
-3. Vercel will automatically detect Next.js and configure the build settings
-4. Deploy!
+**Option 1: Via Vercel Dashboard (Recommended)**
+1. Push your code to GitHub (already done!)
+2. Visit [Vercel Dashboard](https://vercel.com/new)
+3. Click "Import Git Repository" and select `draphael123/data-visualization`
+4. Vercel will automatically detect Next.js and configure the build settings
+5. Click "Deploy" - Vercel will build and deploy your app!
+
+**Option 2: Via Vercel CLI**
+```bash
+npm i -g vercel
+vercel
+```
+
+**Note**: The build may show warnings during static page generation (this is normal for client-side apps). The deployment will still succeed and the app will work correctly at runtime.
+
+Your app is already deployed at: https://data-visualization-*.vercel.app (check your Vercel dashboard for the exact URL)
 
 The app is fully compatible with Vercel's Edge runtime. All file processing happens client-side, so there are no server-side constraints.
 
