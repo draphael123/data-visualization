@@ -204,7 +204,7 @@ export function ChartBuilder({ dataset, onClose }: ChartBuilderProps) {
               <SelectValue placeholder="Select column (optional)" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">None (use count)</SelectItem>
+              <SelectItem value="__count__">None (use count)</SelectItem>
               {numericCols.map((col) => (
                 <SelectItem key={col} value={col}>
                   {col}
