@@ -142,7 +142,7 @@ export default function HomePageClient() {
               whileTap={{ scale: 0.95 }}
             >
               <Button
-                onClick={handleSampleDataset}
+                onClick={() => handleSampleDataset('sample.csv')}
                 variant="outline"
                 size="lg"
                 className="glass shine group"
