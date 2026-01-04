@@ -46,6 +46,48 @@ export function ChartCard({ chart }: ChartCardProps) {
     });
   };
 
+  const handleCopyData = () => {
+    try {
+      // Convert chart data to CSV format
+      if (chart.data.length === 0) {
+        toast({
+          title: 'No data to copy',
+          description: 'Chart contains no data',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      const headers = Object.keys(chart.data[0] || {});
+      const csvRows = [
+        headers.join(','),
+        ...chart.data.map((row) =>
+          headers.map((header) => {
+            const value = row[header];
+            if (value === null || value === undefined) return '';
+            const stringValue = String(value);
+            if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
+              return `"${stringValue.replace(/"/g, '""')}"`;
+            }
+            return stringValue;
+          }).join(',')
+        ),
+      ];
+      const csv = csvRows.join('\n');
+      navigator.clipboard.writeText(csv);
+      toast({
+        title: 'Data copied',
+        description: 'Chart data copied to clipboard as CSV',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Error copying data',
+        description: error.message || 'Failed to copy data',
+        variant: 'destructive',
+      });
+    }
+  };
+
   const handleTitleSave = () => {
     updateChartTitle(chart.id, title);
     setIsEditing(false);

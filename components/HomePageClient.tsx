@@ -20,17 +20,18 @@ export default function HomePageClient() {
   const { addDataset, datasets } = useStore();
   const { toast } = useToast();
 
-  const handleSampleDataset = async () => {
+  const handleSampleDataset = async (sampleFile: string = 'sample.csv') => {
     try {
-      const response = await fetch('/samples/sample.csv');
+      const response = await fetch(`/samples/${sampleFile}`);
       const text = await response.text();
       const blob = new Blob([text], { type: 'text/csv' });
-      const file = new File([blob], 'sample.csv', { type: 'text/csv' });
-      const dataset = await parseCSV(file, 'Sample Dataset');
+      const file = new File([blob], sampleFile, { type: 'text/csv' });
+      const datasetName = sampleFile.replace('.csv', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      const dataset = await parseCSV(file, datasetName);
       addDataset(dataset);
       toast({
         title: 'Sample dataset loaded',
-        description: 'Navigate to dashboard to view visualizations',
+        description: `${datasetName} loaded successfully`,
       });
       router.push('/dashboard');
     } catch (error: any) {

@@ -11,6 +11,7 @@ import { DataTable } from '@/components/DataTable';
 import { InstructionsPanel } from '@/components/InstructionsPanel';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Footer } from '@/components/Footer';
+import { ProjectManager } from '@/components/ProjectManager';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -110,13 +111,19 @@ export default function DashboardClient() {
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-3"
           >
-            <div className="sticky top-6">
-              <h2 className="text-lg font-semibold mb-4">Datasets</h2>
-              <DatasetList
-                onSelectDataset={(dataset) => {
-                  setActiveDataset(dataset.id);
-                }}
-              />
+            <div className="sticky top-6 space-y-6">
+              <div>
+                <h2 className="text-lg font-semibold mb-4">Datasets</h2>
+                <DatasetList
+                  onSelectDataset={(dataset) => {
+                    setActiveDataset(dataset.id);
+                  }}
+                />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold mb-4">Projects</h2>
+                <ProjectManager />
+              </div>
             </div>
           </motion.aside>
 
