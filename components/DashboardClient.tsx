@@ -8,6 +8,7 @@ import { DatasetList } from '@/components/DatasetList';
 import { ChartGrid } from '@/components/ChartGrid';
 import { InsightsPanel } from '@/components/InsightsPanel';
 import { DataTable } from '@/components/DataTable';
+import { InstructionsPanel } from '@/components/InstructionsPanel';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -121,7 +122,8 @@ export default function DashboardClient() {
             animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-6"
           >
-            <Tabs defaultValue="charts" className="w-full">
+            <InstructionsPanel />
+            <Tabs defaultValue="charts" className="w-full mt-6">
               <TabsList className="mb-4">
                 <TabsTrigger value="charts">Charts</TabsTrigger>
                 <TabsTrigger value="table">Data Table</TabsTrigger>

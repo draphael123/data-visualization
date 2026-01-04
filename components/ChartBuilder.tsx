@@ -58,31 +58,51 @@ export function ChartBuilder({ dataset, onClose }: ChartBuilderProps) {
       case 'line':
       case 'area':
         if (!yAxis) {
-          toast({
-            title: 'Error',
-            description: 'Please select a Y-axis column',
-            variant: 'destructive',
-          });
-          return;
+          // If no Y-axis selected, use count aggregation with X-axis categories
+          chartData = dataset.rawData.reduce((acc: any[], row) => {
+            const key = String(row[xAxis] || '');
+            const existing = acc.find((item) => item[xAxis] === key);
+            if (existing) {
+              existing.value = (existing.value || 0) + 1;
+            } else {
+              acc.push({ [xAxis]: key, value: 1 });
+            }
+            return acc;
+          }, []);
+        } else {
+          chartData = aggregateData(dataset.rawData, xAxis, yAxis, aggregation, dateCols.includes(xAxis) ? dateBucket : undefined);
         }
-        chartData = aggregateData(dataset.rawData, xAxis, yAxis, aggregation, dateCols.includes(xAxis) ? dateBucket : undefined);
         break;
       case 'pie':
         if (!yAxis) {
+          // If no Y-axis selected, use count aggregation with X-axis categories
+          chartData = dataset.rawData.reduce((acc: any[], row) => {
+            const key = String(row[xAxis] || '');
+            const existing = acc.find((item) => item[xAxis] === key);
+            if (existing) {
+              existing.value = (existing.value || 0) + 1;
+            } else {
+              acc.push({ [xAxis]: key, value: 1 });
+            }
+            return acc;
+          }, []);
+        } else {
+          chartData = aggregateData(dataset.rawData, xAxis, yAxis, aggregation);
+        }
+        break;
+      case 'scatter':
+        if (!yAxis) {
           toast({
             title: 'Error',
-            description: 'Please select a Y-axis column',
+            description: 'Scatter plots require both X and Y axes',
             variant: 'destructive',
           });
           return;
         }
-        chartData = aggregateData(dataset.rawData, xAxis, yAxis, aggregation);
-        break;
-      case 'scatter':
-        if (!yAxis || !numericCols.includes(yAxis)) {
+        if (!numericCols.includes(yAxis) || !numericCols.includes(xAxis)) {
           toast({
             title: 'Error',
-            description: 'Please select numeric columns for scatter plot',
+            description: 'Scatter plots require numeric columns for both axes',
             variant: 'destructive',
           });
           return;
@@ -176,7 +196,29 @@ export function ChartBuilder({ dataset, onClose }: ChartBuilderProps) {
         </Select>
       </div>
 
-      {chartType !== 'histogram' && (
+      {chartType !== 'histogram' && chartType !== 'scatter' && (
+        <div className="space-y-2">
+          <Label htmlFor="yAxis">Y-Axis (Optional)</Label>
+          <Select value={yAxis} onValueChange={setYAxis}>
+            <SelectTrigger id="yAxis">
+              <SelectValue placeholder="Select column (optional)" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">None (use count)</SelectItem>
+              {numericCols.map((col) => (
+                <SelectItem key={col} value={col}>
+                  {col}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <p className="text-xs text-muted-foreground">
+            Leave empty to count occurrences of each X-axis value
+          </p>
+        </div>
+      )}
+      
+      {chartType === 'scatter' && (
         <div className="space-y-2">
           <Label htmlFor="yAxis">Y-Axis</Label>
           <Select value={yAxis} onValueChange={setYAxis}>
