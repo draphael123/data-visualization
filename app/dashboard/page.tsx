@@ -1,8 +1,8 @@
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 
 export const dynamic = 'force-dynamic';
 
-const DashboardClient = dynamic(() => import('@/components/DashboardClient'), {
+const DashboardClient = dynamicImport(() => import('@/components/DashboardClient'), {
   ssr: false,
 });
 

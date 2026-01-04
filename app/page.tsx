@@ -1,8 +1,8 @@
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 
 export const dynamic = 'force-dynamic';
 
-const HomePageClient = dynamic(() => import('@/components/HomePageClient'), {
+const HomePageClient = dynamicImport(() => import('@/components/HomePageClient'), {
   ssr: false,
 });
 
