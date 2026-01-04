@@ -94,6 +94,7 @@ export function Dropzone() {
   });
 
   return (
+    <>
     <Card className="glass-strong p-8 border-2 border-dashed transition-all hover:border-primary/50 hover:shadow-xl group">
       <div {...getRootProps()} className="cursor-pointer">
         <input {...getInputProps()} />
@@ -131,6 +132,14 @@ export function Dropzone() {
         </div>
       )}
     </Card>
+    <UploadPreview
+      datasets={previewDatasets}
+      fileNames={previewFileNames}
+      isOpen={showPreview}
+      onConfirm={handleConfirmUpload}
+      onCancel={handleCancelUpload}
+    />
+    </>
   );
 }
 
