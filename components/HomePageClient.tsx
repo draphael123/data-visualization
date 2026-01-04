@@ -10,7 +10,7 @@ import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { FileSpreadsheet, BarChart3, Sparkles, Zap, Shield, Rocket, Info } from 'lucide-react';
+import { FileSpreadsheet, BarChart3, Sparkles, Zap, Shield, Rocket, Info, Mail } from 'lucide-react';
 import { useStore } from '@/store/store';
 import { parseCSV } from '@/lib/parse';
 import { useToast } from '@/components/ui/use-toast';
@@ -73,6 +73,15 @@ export default function HomePageClient() {
             >
               <Info className="h-4 w-4 mr-2" />
               About
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => router.push('/contact')}
+              className="hidden sm:flex"
+            >
+              <Mail className="h-4 w-4 mr-2" />
+              Contact
             </Button>
             <ThemeToggle />
           </motion.div>
