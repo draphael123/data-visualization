@@ -9,36 +9,46 @@ import { Button } from '@/components/ui/button';
 import { parseCSV, parseExcel } from '@/lib/parse';
 import { useStore } from '@/store/store';
 import { useToast } from '@/components/ui/use-toast';
+import { UploadPreview } from '@/components/UploadPreview';
+import { Dataset } from '@/lib/types';
 
 export function Dropzone() {
   const { addDataset } = useStore();
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState<string>('');
+  const [previewDatasets, setPreviewDatasets] = useState<Dataset[]>([]);
+  const [previewFileNames, setPreviewFileNames] = useState<string[]>([]);
+  const [showPreview, setShowPreview] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     setIsProcessing(true);
     setProgress('Processing files...');
 
     try {
+      const parsedDatasets: Dataset[] = [];
+      const fileNames: string[] = [];
+
       for (const file of acceptedFiles) {
         setProgress(`Processing ${file.name}...`);
 
         if (file.name.endsWith('.csv')) {
           const dataset = await parseCSV(file, file.name);
-          addDataset(dataset);
-          toast({
-            title: 'File uploaded',
-            description: `${file.name} processed successfully`,
-          });
+          parsedDatasets.push(dataset);
+          fileNames.push(file.name);
         } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
           const datasets = await parseExcel(file);
-          datasets.forEach((ds) => addDataset(ds));
-          toast({
-            title: 'File uploaded',
-            description: `${file.name} processed successfully (${datasets.length} sheet${datasets.length > 1 ? 's' : ''})`,
-          });
+          parsedDatasets.push(...datasets);
+          // For Excel files with multiple sheets, use the filename for each
+          datasets.forEach(() => fileNames.push(file.name));
         }
+      }
+
+      // Show preview instead of directly adding
+      if (parsedDatasets.length > 0) {
+        setPreviewDatasets(parsedDatasets);
+        setPreviewFileNames(fileNames);
+        setShowPreview(true);
       }
     } catch (error: any) {
       toast({
@@ -50,7 +60,28 @@ export function Dropzone() {
       setIsProcessing(false);
       setProgress('');
     }
-  }, [addDataset, toast]);
+  }, [toast]);
+
+  const handleConfirmUpload = useCallback(() => {
+    previewDatasets.forEach((dataset) => {
+      addDataset(dataset);
+    });
+    
+    toast({
+      title: 'Files uploaded',
+      description: `${previewDatasets.length} dataset${previewDatasets.length > 1 ? 's' : ''} added successfully`,
+    });
+
+    setShowPreview(false);
+    setPreviewDatasets([]);
+    setPreviewFileNames([]);
+  }, [previewDatasets, addDataset, toast]);
+
+  const handleCancelUpload = useCallback(() => {
+    setShowPreview(false);
+    setPreviewDatasets([]);
+    setPreviewFileNames([]);
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({
     onDrop,
