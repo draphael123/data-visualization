@@ -10,6 +10,7 @@ import { InsightsPanel } from '@/components/InsightsPanel';
 import { DataTable } from '@/components/DataTable';
 import { InstructionsPanel } from '@/components/InstructionsPanel';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -54,9 +55,9 @@ export default function DashboardClient() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative flex flex-col">
       <AnimatedBackground />
-      <div className="container mx-auto px-4 py-6 relative">
+      <div className="container mx-auto px-4 py-6 relative flex-1">
         <header className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-4">
             <Button
@@ -163,6 +164,7 @@ export default function DashboardClient() {
           </motion.aside>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
