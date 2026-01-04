@@ -2,6 +2,7 @@
 
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { motion } from 'framer-motion';
 import { Upload, FileText, X } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
