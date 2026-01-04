@@ -118,7 +118,7 @@ export function createTransformedDataset(
     id: `${dataset.id}-transformed-${Date.now()}`,
     name: `${dataset.name} (transformed)`,
     rawData: filteredData,
-    rows: filteredData.map((row) => columns.map((col) => row[col])),
+    rows: filteredData.map((row) => columns.map((col: string) => row[col])),
     columns,
     columnProfiles,
   };
