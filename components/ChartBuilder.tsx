@@ -57,7 +57,7 @@ export function ChartBuilder({ dataset, onClose }: ChartBuilderProps) {
       case 'bar':
       case 'line':
       case 'area':
-        if (!yAxis) {
+        if (!yAxis || yAxis === '__count__') {
           // If no Y-axis selected, use count aggregation with X-axis categories
           chartData = dataset.rawData.reduce((acc: any[], row) => {
             const key = String(row[xAxis] || '');
@@ -74,7 +74,7 @@ export function ChartBuilder({ dataset, onClose }: ChartBuilderProps) {
         }
         break;
       case 'pie':
-        if (!yAxis) {
+        if (!yAxis || yAxis === '__count__') {
           // If no Y-axis selected, use count aggregation with X-axis categories
           chartData = dataset.rawData.reduce((acc: any[], row) => {
             const key = String(row[xAxis] || '');
@@ -137,7 +137,7 @@ export function ChartBuilder({ dataset, onClose }: ChartBuilderProps) {
       title: chartTitle,
       type: chartType,
       xAxis,
-      yAxis: chartType !== 'histogram' ? yAxis : undefined,
+      yAxis: chartType !== 'histogram' && yAxis !== '__count__' ? yAxis : undefined,
       aggregation: chartType !== 'scatter' && chartType !== 'histogram' ? aggregation : undefined,
       dateBucket: dateCols.includes(xAxis) ? dateBucket : undefined,
       data: chartData,
