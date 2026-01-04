@@ -1,0 +1,28 @@
+Date,Product,Category,Sales,Quantity,Region
+2024-01-15,Laptop,Electronics,1200,5,North
+2024-01-16,Smartphone,Electronics,800,12,South
+2024-01-17,Desk Chair,Furniture,350,8,East
+2024-01-18,Monitor,Electronics,450,15,West
+2024-01-19,Table,Furniture,600,3,North
+2024-01-20,Headphones,Electronics,150,25,South
+2024-01-21,Keyboard,Electronics,120,20,East
+2024-01-22,Desk,Furniture,800,2,West
+2024-01-23,Tablet,Electronics,550,10,North
+2024-01-24,Chair,Furniture,200,18,South
+2024-01-25,Mouse,Electronics,50,30,East
+2024-01-26,Bookshelf,Furniture,450,6,West
+2024-01-27,Laptop,Electronics,1300,4,North
+2024-01-28,Smartphone,Electronics,750,14,South
+2024-01-29,Desk Chair,Furniture,380,7,East
+2024-01-30,Monitor,Electronics,500,12,West
+2024-02-01,Table,Furniture,650,3,North
+2024-02-02,Headphones,Electronics,140,28,South
+2024-02-03,Keyboard,Electronics,110,22,East
+2024-02-04,Desk,Furniture,850,2,West
+2024-02-05,Tablet,Electronics,600,9,North
+2024-02-06,Chair,Furniture,220,16,South
+2024-02-07,Mouse,Electronics,45,35,East
+2024-02-08,Bookshelf,Furniture,480,5,West
+2024-02-09,Laptop,Electronics,1250,5,North
+2024-02-10,Smartphone,Electronics,820,13,South
+
