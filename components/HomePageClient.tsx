@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Dropzone } from '@/components/Dropzone';
 import { InstructionsPanel } from '@/components/InstructionsPanel';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { FileSpreadsheet, BarChart3, Sparkles } from 'lucide-react';
+import { FileSpreadsheet, BarChart3, Sparkles, Zap, Shield, Rocket } from 'lucide-react';
 import { useStore } from '@/store/store';
 import { parseCSV } from '@/lib/parse';
 import { useToast } from '@/components/ui/use-toast';
@@ -41,14 +42,29 @@ export default function HomePageClient() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative">
+      <AnimatedBackground />
       <div className="container relative mx-auto px-4 py-8">
         <header className="flex items-center justify-between mb-12">
-          <div className="flex items-center space-x-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold">VizDrop</h1>
-          </div>
-          <ThemeToggle />
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center space-x-2"
+          >
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+            >
+              <Sparkles className="h-6 w-6 text-primary" />
+            </motion.div>
+            <h1 className="text-2xl font-bold gradient-text">VizDrop</h1>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <ThemeToggle />
+          </motion.div>
         </header>
 
         <motion.div
@@ -62,7 +78,7 @@ export default function HomePageClient() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
+              className="text-4xl md:text-5xl font-bold mb-4 gradient-text"
             >
               Visualize Your Data Instantly
             </motion.h2>
@@ -100,23 +116,36 @@ export default function HomePageClient() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button
-              onClick={handleSampleDataset}
-              variant="outline"
-              size="lg"
-              className="glass"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <FileSpreadsheet className="mr-2 h-5 w-5" />
-              Try Sample Dataset
-            </Button>
-            {datasets.length > 0 && (
               <Button
-                onClick={() => router.push('/dashboard')}
+                onClick={handleSampleDataset}
+                variant="outline"
                 size="lg"
+                className="glass shine group"
               >
-                <BarChart3 className="mr-2 h-5 w-5" />
-                Go to Dashboard
+                <FileSpreadsheet className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+                Try Sample Dataset
               </Button>
+            </motion.div>
+            {datasets.length > 0 && (
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                <Button
+                  onClick={() => router.push('/dashboard')}
+                  size="lg"
+                  className="animate-pulse-glow"
+                >
+                  <BarChart3 className="mr-2 h-5 w-5" />
+                  Go to Dashboard
+                </Button>
+              </motion.div>
             )}
           </motion.div>
 
@@ -126,33 +155,66 @@ export default function HomePageClient() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="grid md:grid-cols-3 gap-6 mt-16"
           >
-            <Card className="glass">
-              <CardHeader>
-                <FileSpreadsheet className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Multiple Formats</CardTitle>
-                <CardDescription>
-                  Support for CSV and Excel files (XLSX)
-                </CardDescription>
-              </CardHeader>
-            </Card>
-            <Card className="glass">
-              <CardHeader>
-                <BarChart3 className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Smart Visualizations</CardTitle>
-                <CardDescription>
-                  Auto-generate charts based on your data types
-                </CardDescription>
-              </CardHeader>
-            </Card>
-            <Card className="glass">
-              <CardHeader>
-                <Sparkles className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Private & Fast</CardTitle>
-                <CardDescription>
-                  Everything runs locally in your browser
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <motion.div
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <Card className="glass-strong shine h-full group cursor-pointer border-primary/20 hover:border-primary/40 transition-all">
+                <CardHeader>
+                  <motion.div
+                    animate={{ rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+                    className="inline-block"
+                  >
+                    <FileSpreadsheet className="h-8 w-8 text-primary mb-2 group-hover:scale-110 transition-transform" />
+                  </motion.div>
+                  <CardTitle className="group-hover:text-primary transition-colors">Multiple Formats</CardTitle>
+                  <CardDescription>
+                    Support for CSV and Excel files (XLSX)
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </motion.div>
+            <motion.div
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <Card className="glass-strong shine h-full group cursor-pointer border-primary/20 hover:border-primary/40 transition-all">
+                <CardHeader>
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="inline-block"
+                  >
+                    <BarChart3 className="h-8 w-8 text-primary mb-2 group-hover:scale-110 transition-transform" />
+                  </motion.div>
+                  <CardTitle className="group-hover:text-primary transition-colors">Smart Visualizations</CardTitle>
+                  <CardDescription>
+                    Auto-generate charts based on your data types
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </motion.div>
+            <motion.div
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <Card className="glass-strong shine h-full group cursor-pointer border-primary/20 hover:border-primary/40 transition-all">
+                <CardHeader>
+                  <motion.div
+                    animate={{ rotate: [0, 15, -15, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, repeatDelay: 1 }}
+                    className="inline-block"
+                  >
+                    <Shield className="h-8 w-8 text-primary mb-2 group-hover:scale-110 transition-transform" />
+                  </motion.div>
+                  <CardTitle className="group-hover:text-primary transition-colors">Private & Fast</CardTitle>
+                  <CardDescription>
+                    Everything runs locally in your browser
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

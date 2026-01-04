@@ -9,7 +9,7 @@ export function InstructionsPanel() {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <Card className="glass mb-6">
+    <Card className="glass-strong mb-6 group">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-semibold flex items-center gap-2">

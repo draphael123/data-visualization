@@ -62,13 +62,17 @@ export function Dropzone() {
   });
 
   return (
-    <Card className="glass p-8 border-2 border-dashed transition-all hover:border-primary/50">
+    <Card className="glass-strong p-8 border-2 border-dashed transition-all hover:border-primary/50 hover:shadow-xl group">
       <div {...getRootProps()} className="cursor-pointer">
         <input {...getInputProps()} />
         <div className="flex flex-col items-center justify-center space-y-4">
-          <div className="rounded-full bg-primary/10 p-4">
-            <Upload className="h-8 w-8 text-primary" />
-          </div>
+          <motion.div
+            animate={isDragActive ? { scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] } : {}}
+            transition={{ duration: 0.5, repeat: isDragActive ? Infinity : 0 }}
+            className="rounded-full bg-primary/10 p-4 group-hover:bg-primary/20 transition-colors"
+          >
+            <Upload className="h-8 w-8 text-primary group-hover:scale-110 transition-transform" />
+          </motion.div>
           <div className="text-center">
             <p className="text-lg font-semibold">
               {isDragActive ? 'Drop files here' : 'Drag & drop files here'}

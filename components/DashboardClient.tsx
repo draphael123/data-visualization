@@ -9,6 +9,7 @@ import { ChartGrid } from '@/components/ChartGrid';
 import { InsightsPanel } from '@/components/InsightsPanel';
 import { DataTable } from '@/components/DataTable';
 import { InstructionsPanel } from '@/components/InstructionsPanel';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -53,8 +54,9 @@ export default function DashboardClient() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <div className="container mx-auto px-4 py-6">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative">
+      <AnimatedBackground />
+      <div className="container mx-auto px-4 py-6 relative">
         <header className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-4">
             <Button
