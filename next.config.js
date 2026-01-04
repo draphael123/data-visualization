@@ -4,7 +4,6 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'recharts'],
   },
-  // Skip static optimization for better client-side rendering
   typescript: {
     ignoreBuildErrors: false,
   },
