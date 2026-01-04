@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Dropzone } from '@/components/Dropzone';
+import { InstructionsPanel } from '@/components/InstructionsPanel';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -79,6 +80,15 @@ export default function HomePageClient() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            className="mb-8"
+          >
+            <InstructionsPanel />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
             className="mb-8"
           >
             <Dropzone />
