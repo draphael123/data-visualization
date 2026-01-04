@@ -9,7 +9,7 @@ import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { FileSpreadsheet, BarChart3, Sparkles, Zap, Shield, Rocket } from 'lucide-react';
+import { FileSpreadsheet, BarChart3, Sparkles, Zap, Shield, Rocket, Info } from 'lucide-react';
 import { useStore } from '@/store/store';
 import { parseCSV } from '@/lib/parse';
 import { useToast } from '@/components/ui/use-toast';
@@ -62,7 +62,17 @@ export default function HomePageClient() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-2"
           >
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => router.push('/about')}
+              className="hidden sm:flex"
+            >
+              <Info className="h-4 w-4 mr-2" />
+              About
+            </Button>
             <ThemeToggle />
           </motion.div>
         </header>
