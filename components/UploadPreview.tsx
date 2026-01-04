@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -18,7 +18,7 @@ interface UploadPreviewProps {
 }
 
 export function UploadPreview({ datasets, fileNames, isOpen, onConfirm, onCancel }: UploadPreviewProps) {
-  const [previewRows, setPreviewRows] = useState(5);
+  const previewRows = 5;
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onCancel()}>
