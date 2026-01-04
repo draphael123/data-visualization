@@ -2,6 +2,17 @@
 
 A modern, production-ready web application for creating interactive data visualizations from CSV and Excel files. Everything runs locally in your browser—no uploads, no servers, fully private.
 
+## Purpose
+
+**VizDrop** is designed to make data visualization accessible, fast, and privacy-focused. Our primary goals are:
+
+- **Instant Data Analysis**: Transform raw data files into meaningful visualizations in seconds
+- **Complete Privacy**: All processing happens locally in your browser—your data never leaves your device
+- **Ease of Use**: No installations, accounts, or complex configurations required
+- **Accessibility**: Empower users of all skill levels to understand and present their data effectively
+
+Whether you're a data analyst, student, business professional, or anyone working with data, VizDrop provides an intuitive platform to visualize information instantly and securely.
+
 ## Features
 
 - 🎯 **Multiple File Formats**: Support for CSV and Excel (XLSX) files
